@@ -36,14 +36,16 @@ export function App() {
     if(index == "todos"){
       setTimes(meusTimes)
     }
-    console.log(index)
   };
 
   return (
     <>
       <Container>
-        <div>
-          <select id="selectBox" onChange={(e) => filtrar(e.target.value)}>
+        <div className="filter">
+          <header>
+            <img src="" alt="" />
+            <h1>Today</h1>
+          <select id="selectBox" className="filter-style" onChange={(e) => filtrar(e.target.value)}>
             <option value="todos"> todos os times </option>
             <option value="A">times com a letra A</option>
             <option value="S">times com a letra S</option>
@@ -51,17 +53,20 @@ export function App() {
             <option value="B">times com a letra B</option>
             <option value="I">times com a letra I</option>
           </select>
+          </header>
         </div>
 
         {times.map((clubes) => (
-          <div>
-            <p>
+          <div className="inputData">
+            <div>
+              <div className="leftInfo">
               <input type="checkbox" />
-              {clubes}
+              <h3>{clubes}</h3>
+              </div>
               <button onClick={() => remover(clubes)} type="button">
                 remover
               </button>
-            </p>
+            </div>
           </div>
         ))}
 
@@ -78,14 +83,14 @@ export function App() {
             setTimes([...times, dados]);
           }}
         >
-          <div>
-            <button>Adicionar</button>
+          <div className="teste">
+            <button>A</button>
             <input
               type="text"
               id="new-task-title"
               value={dados}
               onChange={(event) => setDados(event.target.value)}
-              placeholder="Digite o nome de um time"
+              placeholder="Create New Item"
               required
               autoComplete="off"
             />
