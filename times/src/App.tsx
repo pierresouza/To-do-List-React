@@ -4,19 +4,19 @@ import { Container } from "./styles/styles";
 
 export function App() {
   const meusTimes = [
-    " corinthians ",
-    " santos ",
-    " avai ",
-    " America-MG ",
-    " bragantino ",
-    " são paulo ",
-    " botafogo ",
-    " internacional ",
-    " curitiba ",
-    " palmeiras",
+    "America-MG",
+    "Avai",
+    "Botafogo",
+    "Bragantino",
+    "Corinthians",
+    "Curitiba",
+    "Internacional",
+    "Palmeiras",
+    "Santos",
+    "São Paulo",
   ];
 
-  const [times, setTimes] = useState<string[]>(meusTimes);
+  const [times, setTimes] = useState(meusTimes);
   const [dados, setDados] = useState<string>("");
 
   meusTimes.sort(function (a, b) {
@@ -28,43 +28,58 @@ export function App() {
     setTimes(clubes);
   };
 
-  
-  function handleClick(){
-    console.log("pegou")
-  }
+  const filtrar = (index: string) => {
+    let filtro = meusTimes.filter((timesComS => timesComS.charAt(0) == index))
+    console.log("filtro : ", filtro)
+    setTimes(filtro)
 
-  
+    if(index == "todos"){
+      setTimes(meusTimes)
+    }
+    console.log(index)
+  };
+
   return (
     <>
       <Container>
-      <div>
-          <select onClick={handleClick}>
-            <option value="" onClick={handleClick}>todos os times</option>
-            <option value="" onClick={handleClick}>times com a letra A</option>
-            <option value="" onClick={handleClick}>times com a letra S</option>
-            <option value="" onClick={handleClick}>times com a letra C</option>
+        <div>
+          <select id="selectBox" onChange={(e) => filtrar(e.target.value)}>
+            <option value="todos"> todos os times </option>
+            <option value="A">times com a letra A</option>
+            <option value="S">times com a letra S</option>
+            <option value="C">times com a letra C</option>
+            <option value="B">times com a letra B</option>
+            <option value="I">times com a letra I</option>
           </select>
-      </div>
-      
+        </div>
 
         {times.map((clubes) => (
           <div>
-            <p> {clubes} <button onClick={() => remover(clubes)} type="button"> remover </button> </p>
+            <p>
+              <input type="checkbox" />
+              {clubes}
+              <button onClick={() => remover(clubes)} type="button">
+                remover
+              </button>
+            </p>
           </div>
         ))}
-          
-        <form onSubmit={(event) => { {/*  campo que coleta informação digitada e atribui ela ao array times */} 
+
+        <form
+          onSubmit={(event) => {
+            {
+              /*  campo que coleta informação digitada e atribui ela ao array times */
+            }
             event.preventDefault();
             if (!!dados) {
               setTimes([...times, dados]);
               setDados("");
             }
-            setTimes([...times,dados]);
-          }}>
+            setTimes([...times, dados]);
+          }}
+        >
           <div>
-            <button >
-              Adicionar
-            </button>
+            <button>Adicionar</button>
             <input
               type="text"
               id="new-task-title"
@@ -74,7 +89,6 @@ export function App() {
               required
               autoComplete="off"
             />
-            
           </div>
         </form>
       </Container>
