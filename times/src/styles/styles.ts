@@ -2,71 +2,120 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
   width: 100vw;
   height: 100vh;
 
   .main-container {
-    height: 50vh;
+    height: auto;
     width: 50vw;
     background: #ffffff;
     box-shadow: 0px 3px 6px 1px rgba(0, 0, 0, 0.15);
     border-radius: 8px;
     padding: 16px;
-  
 
     .filter {
       header {
         display: flex;
+        align-items: center;
         width: 50vw;
         list-style-type: none;
 
+        img {
+          margin-left: 16px;
+        }
+
         h1 {
+          padding-left: 16px;
           flex: 1;
         }
-      }
-    }
 
-    .inputData {
-      width: 48vw;
-      height: 48px;
-      display: flex;
-      padding: 8px  ;
-      &:hover {
-        background: #ffffff;
-        box-shadow: 0px 3px 6px 1px rgba(0, 0, 0, 0.15);
-        border-radius: 5px;
-      }
-      div {
-        display: flex;
-        align-items: center;
+        select {
+          border: 0;
+          height: 24px;
+          width: 72px;
+          -webkit-appearance: none;
+          text-align: center;
+          box-shadow: 0px 3px 6px 1px rgba(0, 0, 0, 0.15);
+          border-radius: 8px;
+          &:focus {
+            outline: 0;
+          }
 
-        .leftInfo {
-          width: 42vw;
-          input{
-            padding-left: 8px;
+          option {
+            color: #3d82eb;
+            box-shadow: 0px 3px 6px 1px rgba(0, 0, 0, 0.15);
+          border-radius: 8px;
           }
         }
       }
     }
 
-    form {
+    .inputData {
       width: 50vw;
-      padding: 16px;
+      height: auto;
+      display: flex;
+      margin: 16px 0;
+
+      li {
+        width: 50vw;
+        display: flex;
+        &:hover {
+          transition: all 0.6s;
+          background: #ffffff;
+          box-shadow: 0px 3px 6px 1px rgba(0, 0, 0, 0.15);
+          border-radius: 5px;
+        }
+        .leftInfo {
+          width: 50vw;
+          margin-left: 20px;
+          display: flex;
+          align-items: center;
+
+          input {
+            height: 24px;
+            width: 24px;
+          }
+
+          p {
+            padding-left: 24px;
+          }
+        }
+        button {
+          border: 0;
+          background: white;
+          cursor: pointer;
+          margin-right: 16px;
+        }
+      }
+    }
+  }
+
+  form {
+    padding: 16px;
+    display: flex;
+
+    .teste {
+      width: 40vw;
+      display: flex;
+      align-items: center;
       button {
-        margin-right: 24px;
+        background: white;
+        border: 0;
+        padding-right: 24px;
       }
 
       input {
+        width: 50%;
+        height: 24px;
         border: 0;
-        width: 30vw;
-        &:focus {
-          outline: 0;
-        }
         &::placeholder {
           color: #3d82eb;
+        }
+
+        &:focus {
+          outline: 0;
         }
       }
     }
