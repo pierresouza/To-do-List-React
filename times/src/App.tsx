@@ -3,23 +3,11 @@ import React, { useState } from "react";
 import { Container } from "./styles/styles";
 
 export function App() {
-  const meusTimes = [
-    "America-MG",
-    "Avai",
-    "Botafogo",
-    "Bragantino",
-    "Corinthians",
-    "Curitiba",
-    "Internacional",
-    "Palmeiras",
-    "Santos",
-    "São Paulo",
-  ];
 
-  const [times, setTimes] = useState(meusTimes);
+  const [times, setTimes] = useState<string[]>([]);
   const [dados, setDados] = useState<string>("");
 
-  meusTimes.sort(function (a, b) {
+  times.sort(function (a, b) {
     return a.localeCompare(b);
   });
 
@@ -29,18 +17,19 @@ export function App() {
   };
 
   const filtrar = (index: string) => {
-    let filtro = meusTimes.filter((timesComS => timesComS.charAt(0) == index))
+    let filtro = times.filter((timesComS => timesComS.charAt(0) == index))
     console.log("filtro : ", filtro)
     setTimes(filtro)
 
     if(index == "todos"){
-      setTimes(meusTimes)
+      setTimes(times)
     }
   };
 
   return (
     <>
       <Container>
+        <div className="main-container">
         <div className="filter">
           <header>
             <img src="" alt="" />
@@ -48,10 +37,7 @@ export function App() {
           <select id="selectBox" className="filter-style" onChange={(e) => filtrar(e.target.value)}>
             <option value="todos"> todos os times </option>
             <option value="A">times com a letra A</option>
-            <option value="S">times com a letra S</option>
-            <option value="C">times com a letra C</option>
-            <option value="B">times com a letra B</option>
-            <option value="I">times com a letra I</option>
+            <option value="clubes">times com a letra S</option>
           </select>
           </header>
         </div>
@@ -96,6 +82,7 @@ export function App() {
             />
           </div>
         </form>
+      </div>
       </Container>
     </>
   );
