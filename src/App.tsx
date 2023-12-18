@@ -1,35 +1,38 @@
 import React, { useState } from "react";
 import { Container } from "./styles/styles";
 
-import { IoIosRemoveCircleOutline } from "react-icons/io";
-import { IoIosAddCircle } from "react-icons/io";
-
+import { IoIosRemoveCircleOutline, IoIosAddCircle } from "react-icons/io";
 import Calendar from "./assets/calendar.svg";
 
 export function App() {
   const [todos, setTodos] = useState<string[]>([]);
   const [value, setValue] = useState<string>("");
+  const [filter, setFilter] = useState<string>("");
 
   const remover = (index: string) => {
-    const Removed = todos.filter((Removed) => Removed !== index);
+    const Removed = todos.filter((removed) => removed !== index);
     setTodos(Removed);
-    console.log(Removed);
   };
+
   const checkbox = (index: string) => {
-    const Completed = todos.filter((Completed) => Completed === index);
+    const Completed = todos.filter((completed) => completed === index);
     setTodos(Completed);
-    console.log(Completed);
   };
 
   const filtrar = (index: string) => {
-    let filtro = todos.filter((tarefas) => tarefas);
-    console.log("filtro : ", filtro);
-    setTodos(filtro);
-
-    if (index == "todos") {
-      setTodos(todos);
-    }
+    setFilter(index);
   };
+
+  const filteredTodos = todos.filter((todo) => {
+    if (filter === "completed") {
+      return todo === "completed";
+    } else if (filter === "In Progress") {
+      return true;
+    } else if (filter === "removed") {
+      return todo === "removed";
+    } else {
+    }
+  });
 
   return (
     <>
@@ -44,16 +47,15 @@ export function App() {
                 className="filter-style"
                 onChange={(e) => filtrar(e.target.value)}
               >
-                <option value="">...</option>
-                <option value="completed">Complete</option>
-                <option value="todos"> In Progress </option>
+                <option value="completed">Completed</option>
+                <option value="In Progress"> In Progress </option>
                 <option value="removed">Removed</option>
               </select>
             </header>
           </div>
 
-          {todos.map((todo, id) => (
-            <div key={id} className="inputData">
+          {filteredTodos.map((todo, id) => (
+            <div className="inputData" key={id}>
               <li>
                 <div className="leftInfo">
                   <input type="checkbox" onChange={() => checkbox(todo)} />
@@ -68,15 +70,11 @@ export function App() {
 
           <form
             onSubmit={(event) => {
-              {
-                /*  campo que coleta informação digitada e atribui ela ao array times */
-              }
               event.preventDefault();
               if (!!value) {
                 setTodos([...todos, value]);
                 setValue("");
               }
-              setTodos([...todos, value]);
             }}
           >
             <div className="teste">
