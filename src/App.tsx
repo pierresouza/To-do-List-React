@@ -53,8 +53,8 @@ export function App() {
           </div>
 
           {todos.map((todo, id) => (
-            <div className="inputData">
-              <li key={id}>
+            <div key={id} className="inputData">
+              <li>
                 <div className="leftInfo">
                   <input type="checkbox" onChange={() => checkbox(todo)} />
                   <p>{todo}</p>
